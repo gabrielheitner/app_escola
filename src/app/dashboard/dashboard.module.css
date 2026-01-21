@@ -1,0 +1,82 @@
+.dashboard {
+    flex: 1;
+    padding: 2rem;
+    padding-top: 1.5rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 768px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.grid-cols-7 {
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+    .grid-cols-7 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-cols-7 {
+        grid-template-columns: repeat(7, 1fr);
+    }
+}
+
+.col-span-4 {
+    grid-column: span 4;
+}
+
+.col-span-3 {
+    grid-column: span 3;
+    /* On mobile, reset to full width if needed, but handled by grid-template-columns */
+}
+
+@media (max-width: 1023px) {
+
+    .col-span-4,
+    .col-span-3 {
+        grid-column: span 1;
+    }
+}
