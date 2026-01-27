@@ -3,8 +3,47 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at top right, #1e293b 0%, #0f172a 100%);
+    background: radial-gradient(circle at top right, #111827 0%, #0a0e1a 100%);
     padding: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background gradient with GREEN glow */
+.loginContainer::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(19, 249, 171, 0.15) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+}
+
+.loginContainer::after {
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+    animation: pulse 8s ease-in-out infinite reverse;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
 }
 
 .loginCard {
@@ -12,11 +51,12 @@
     max-width: 400px;
     padding: 2.5rem;
     border-radius: 24px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    /* Glass effect from global .glass class will be applied via composition or separate class */
-    background: rgba(30, 41, 59, 0.7);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    background: rgba(17, 24, 39, 0.8);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(19, 249, 171, 0.2);
+    position: relative;
+    z-index: 1;
 }
 
 .loginHeader {
@@ -28,9 +68,8 @@
     font-size: 1.875rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    background: linear-gradient(to right, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #13F9AB;
+    text-shadow: 0 0 20px rgba(19, 249, 171, 0.4);
 }
 
 .loginHeader p {

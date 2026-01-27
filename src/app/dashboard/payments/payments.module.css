@@ -54,7 +54,7 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    padding: 2px 8px;
+    padding: 4px 12px;
     border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 600;
@@ -63,19 +63,25 @@
 }
 
 .success {
-    background: rgba(16, 185, 129, 0.2);
-    color: #34d399;
-    border: 1px solid rgba(16, 185, 129, 0.2);
+    background: linear-gradient(135deg, #13F9AB 0%, #0BCEFF 100%);
+    color: white;
+    box-shadow: 0 0 10px rgba(19, 249, 171, 0.3);
 }
 
 .warning {
-    background: rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-    border: 1px solid rgba(245, 158, 11, 0.2);
+    background: linear-gradient(135deg, #FF8C04 0%, #FF784F 100%);
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 140, 4, 0.3);
+}
+
+.info {
+    background: linear-gradient(135deg, #0BCEFF 0%, #13F9AB 100%);
+    color: white;
+    box-shadow: 0 0 10px rgba(11, 206, 255, 0.3);
 }
 
 .danger {
-    background: rgba(239, 68, 68, 0.2);
-    color: #f87171;
-    border: 1px solid rgba(239, 68, 68, 0.2);
+    background: linear-gradient(135deg, #FF784F 0%, #FF8C04 100%);
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 120, 79, 0.3);
 }

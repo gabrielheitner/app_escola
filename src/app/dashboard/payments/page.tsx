@@ -37,33 +37,75 @@ export default async function PaymentsPage() {
                             <th>Status</th>
                             <th>Valor</th>
                             <th>Vencimento</th>
+                            <th>Data Disparo</th>
+                            <th>Data Pagamento</th>
+                            <th>Conversão</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {payments?.map((payment) => (
-                            <tr key={payment.id} className={styles.row}>
-                                <td>
-                                    <div style={{ fontWeight: 500 }}>{payment.customer_name}</div>
-                                    <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{payment.asaas_payment_id}</div>
-                                </td>
-                                <td>{payment.customer_phone || '-'}</td>
-                                <td>
-                                    <span className={`${styles.badge} ${payment.status === 'RECEIVED' || payment.status === 'CONFIRMED' ? styles.success : payment.status === 'PENDING' ? styles.warning : styles.danger}`}>
-                                        {payment.status}
-                                    </span>
-                                </td>
-                                <td>
-                                    {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(payment.value)}
-                                </td>
-                                <td>
-                                    {new Date(payment.due_date).toLocaleDateString('pt-BR')}
-                                </td>
-                            </tr>
-                        ))}
+                        {payments?.map((payment) => {
+                            // Calcular badge de status
+                            const isPaid = ['RECEIVED', 'CONFIRMED', 'PAGO'].includes(payment.status?.toUpperCase())
+                            const isPending = payment.status?.toUpperCase() === 'PENDING'
+                            const isDispatched = payment.message_sent && !isPaid
+
+                            return (
+                                <tr key={payment.id} className={styles.row}>
+                                    <td>
+                                        <div style={{ fontWeight: 500 }}>{payment.customer_name}</div>
+                                        <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{payment.asaas_payment_id}</div>
+                                    </td>
+                                    <td>{payment.customer_phone || '-'}</td>
+                                    <td>
+                                        <span className={`${styles.badge} ${isPaid ? styles.success :
+                                                isDispatched ? styles.info :
+                                                    isPending ? styles.warning :
+                                                        styles.danger
+                                            }`}>
+                                            {isPaid ? 'PAGO' : isDispatched ? 'DISPARADO' : payment.status}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(payment.value)}
+                                    </td>
+                                    <td>
+                                        {new Date(payment.due_date).toLocaleDateString('pt-BR')}
+                                    </td>
+                                    <td>
+                                        {payment.dispatch_date
+                                            ? new Date(payment.dispatch_date).toLocaleString('pt-BR', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })
+                                            : '-'
+                                        }
+                                    </td>
+                                    <td>
+                                        {payment.payment_date
+                                            ? new Date(payment.payment_date).toLocaleString('pt-BR', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                hour: '2-digit',
+                                                minute: '2-digit'
+                                            })
+                                            : '-'
+                                        }
+                                    </td>
+                                    <td>
+                                        {payment.conversion_time_hours
+                                            ? `${Math.round(payment.conversion_time_hours)}h`
+                                            : '-'
+                                        }
+                                    </td>
+                                </tr>
+                            )
+                        })}
 
                         {(!payments || payments.length === 0) && (
                             <tr>
-                                <td colSpan={5} style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
+                                <td colSpan={8} style={{ textAlign: 'center', padding: '2rem', color: 'var(--text-muted)' }}>
                                     Nenhum pagamento encontrado.
                                 </td>
                             </tr>

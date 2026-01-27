@@ -1,0 +1,167 @@
+/* CINEMATIC DARK THEME - GREEN DOMINANT */
+/* Updated: 2026-01-27 16:14 - Green as Primary Color */
+
+:root {
+    /* Dark Cinematic Background */
+    --background: #0a0e1a !important;
+    --surface: #111827 !important;
+    --surface-hover: #1f2937 !important;
+
+    /* Vibrant Green (PRIMARY - DOMINANT) */
+    --primary: #13F9AB !important;
+    --primary-hover: #10E89E !important;
+    --primary-glow: rgba(19, 249, 171, 0.4) !important;
+
+    /* Secondary Colors */
+    --secondary: #00D9FF !important;
+    --accent: #F59E0B !important;
+    --accent-secondary: #EF4444 !important;
+
+    /* Text */
+    --text-main: #FFFFFF !important;
+    --text-muted: #9CA3AF !important;
+
+    /* Borders */
+    --border: #1f2937 !important;
+    --border-hover: #374151 !important;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #13F9AB 0%, #00D9FF 100%) !important;
+    --gradient-dark: linear-gradient(180deg, #0a0e1a 0%, #111827 100%) !important;
+}
+
+/* Global Background */
+body {
+    background: var(--background) !important;
+    color: var(--text-main) !important;
+}
+
+/* Force button colors - GREEN DOMINANT */
+.btn-primary {
+    background: var(--primary) !important;
+    color: #0a0e1a !important;
+    font-weight: 600 !important;
+    box-shadow: 0 0 20px var(--primary-glow) !important;
+    border: none !important;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover) !important;
+    box-shadow: 0 0 30px var(--primary-glow) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Cards with cinematic feel */
+.card {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 30px rgba(19, 249, 171, 0.2) !important;
+}
+
+/* Titles with GREEN glow */
+h1,
+h2,
+h3.title,
+.title {
+    color: var(--primary) !important;
+    text-shadow: 0 0 20px var(--primary-glow) !important;
+    background: none !important;
+    -webkit-text-fill-color: unset !important;
+}
+
+/* Date picker active state - GREEN */
+.date-picker-option.active {
+    background: var(--primary) !important;
+    color: #0a0e1a !important;
+    font-weight: 600 !important;
+    box-shadow: 0 0 15px var(--primary-glow) !important;
+}
+
+.date-picker-button {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-main) !important;
+}
+
+.date-picker-button:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 10px var(--primary-glow) !important;
+}
+
+/* Input fields */
+.input {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-main) !important;
+}
+
+.input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 10px var(--primary-glow) !important;
+}
+
+/* Badges with vibrant colors */
+.badge {
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+/* Success badge - GREEN */
+.success {
+    background: var(--primary) !important;
+    color: #0a0e1a !important;
+    box-shadow: 0 0 15px var(--primary-glow) !important;
+}
+
+/* Info badge - Cyan */
+.info {
+    background: var(--secondary) !important;
+    color: #0a0e1a !important;
+    box-shadow: 0 0 15px rgba(0, 217, 255, 0.4) !important;
+}
+
+/* Warning badge - Amber */
+.warning {
+    background: var(--accent) !important;
+    color: #0a0e1a !important;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4) !important;
+}
+
+/* Danger badge - Red */
+.danger {
+    background: var(--accent-secondary) !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Sidebar */
+nav,
+aside {
+    background: var(--surface) !important;
+    border-right: 1px solid var(--border) !important;
+}
+
+/* Links */
+a:hover {
+    color: var(--primary) !important;
+}
+
+/* Code blocks */
+.codeBlock,
+.pre {
+    background: #000000 !important;
+    border: 1px solid var(--primary) !important;
+    color: var(--primary) !important;
+    box-shadow: 0 0 10px var(--primary-glow) !important;
+}
+
+/* Chart colors - GREEN dominant */
+.recharts-bar-rectangle {
+    fill: var(--primary) !important;
+}

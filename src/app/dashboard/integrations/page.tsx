@@ -59,11 +59,18 @@ export default async function IntegrationsPage() {
   "customer_phone": "5511999999999",
   "value": 150.00,
   "status": "PENDING",
-  "due_date": "2024-12-31"
+  "due_date": "2024-12-31",
+  "dispatch_date": "2024-12-15T10:30:00Z",
+  "message_sent": true,
+  "payment_date": null,
+  "description": "Mensalidade Janeiro 2024"
 }`}
                         </pre>
                         <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
                             <strong>Importante:</strong> O <code>school_id</code> deve ser exatamente o da sua escola para garantir a segurança dos dados.
+                        </p>
+                        <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                            <strong>Novos campos:</strong> <code>dispatch_date</code> (data/hora do envio da mensagem) e <code>message_sent</code> (true se mensagem foi enviada) são usados para rastrear conversões.
                         </p>
                     </div>
                 </div>

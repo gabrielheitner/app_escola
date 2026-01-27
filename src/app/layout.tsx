@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google"; // Using Inter for premium look
 import "./globals.css";
+import "./force-colors.css"; // Force new color palette
 
 const inter = Inter({ subsets: ["latin"] });
 
