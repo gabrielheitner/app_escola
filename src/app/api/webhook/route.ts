@@ -116,10 +116,11 @@ export async function POST(request: Request) {
     const timestamp = new Date().toISOString()
 
     try {
-        // 1. Parse body
+        // 1. Parse body (lê como texto raw para máxima compatibilidade com n8n)
         let body: any
         try {
-            body = await request.json()
+            const rawText = await request.text()
+            body = JSON.parse(rawText)
         } catch {
             return NextResponse.json(
                 { error: 'Body inválido — envie JSON válido' },
