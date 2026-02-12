@@ -10,22 +10,18 @@ export default async function IntegrationsPage() {
         redirect('/login')
     }
 
-    // Getting school ID for context (admin gets generic info for now)
     const { data: profile } = await supabase
         .from('profiles')
         .select('school_id')
         .eq('id', user.id)
         .single()
 
-    // Fallback if production URL is not set (localhost)
-    // NOTE: In production (Vercel), we manually set this or use window.location in client
-    // For server component, we can use a hardcoded value or env
-    const webhookUrl = 'https://app-escola-five.vercel.app/api/webhook'
+    const webhookUrl = 'https://app.gerautomacoes.com.br/api/webhook'
 
     return (
         <div className={styles.container}>
             <header className={styles.header}>
-                <h1 className={styles.title}>Integrações & API</h1>
+                <h1 className={styles.title}>Integrações &amp; API</h1>
                 <p className={styles.subtitle}>Configure a comunicação entre o n8n/Asaas e o seu Dashboard.</p>
             </header>
 
@@ -47,8 +43,8 @@ export default async function IntegrationsPage() {
 
                 <div className={styles.card}>
                     <div className={styles.cardHeader}>
-                        <h3>Documentação (JSON Body)</h3>
-                        <p>Estrutura obrigatória para o envio dos dados.</p>
+                        <h3>Envio Único (1 pagamento)</h3>
+                        <p>Envie um objeto JSON com os dados do pagamento.</p>
                     </div>
                     <div className={styles.cardContent}>
                         <pre className={styles.pre}>
@@ -59,18 +55,80 @@ export default async function IntegrationsPage() {
   "customer_phone": "5511999999999",
   "value": 150.00,
   "status": "PENDING",
-  "due_date": "2024-12-31",
-  "dispatch_date": "2024-12-15T10:30:00Z",
+  "due_date": "14-02-2026",
+  "dispatch_date": "{{ $now }}",
   "message_sent": true,
   "payment_date": null,
-  "description": "Mensalidade Janeiro 2024"
+  "description": "Mensalidade Janeiro 2026"
+}`}
+                        </pre>
+                    </div>
+                </div>
+
+                <div className={styles.card}>
+                    <div className={styles.cardHeader}>
+                        <h3>Envio em Lote (batch)</h3>
+                        <p>Envie um array de pagamentos de uma vez.</p>
+                    </div>
+                    <div className={styles.cardContent}>
+                        <pre className={styles.pre}>
+                            {`[
+  { "school_id": "...", "asaas_payment_id": "pay_1", ... },
+  { "school_id": "...", "asaas_payment_id": "pay_2", ... }
+]`}
+                        </pre>
+                    </div>
+                </div>
+
+                <div className={styles.card}>
+                    <div className={styles.cardHeader}>
+                        <h3>Formatos de Data Aceitos</h3>
+                        <p>O endpoint aceita vários formatos automaticamente.</p>
+                    </div>
+                    <div className={styles.cardContent}>
+                        <pre className={styles.pre}>
+                            {`✅ "14-02-2026"          (DD-MM-AAAA)
+✅ "14/02/2026"          (DD/MM/AAAA)
+✅ "2026-02-14"          (AAAA-MM-DD)
+✅ "2026-02-14T10:30:00Z" (ISO completo)
+✅ "{{ $now }}"           (n8n DateTime)`}
+                        </pre>
+                    </div>
+                </div>
+
+                <div className={styles.card}>
+                    <div className={styles.cardHeader}>
+                        <h3>Status Aceitos</h3>
+                        <p>Mapeamento automático de status.</p>
+                    </div>
+                    <div className={styles.cardContent}>
+                        <pre className={styles.pre}>
+                            {`PENDING / PENDENTE   →  PENDING
+RECEIVED / PAGO / RECEBIDO / CONFIRMED  →  RECEIVED
+OVERDUE / VENCIDO / VENCIDA  →  OVERDUE
+CANCELLED / CANCELADO  →  CANCELLED
+REFUNDED / ESTORNADO  →  REFUNDED`}
+                        </pre>
+                    </div>
+                </div>
+
+                <div className={styles.card}>
+                    <div className={styles.cardHeader}>
+                        <h3>Resposta da API</h3>
+                        <p>Formato da resposta retornada pelo webhook.</p>
+                    </div>
+                    <div className={styles.cardContent}>
+                        <pre className={styles.pre}>
+                            {`{
+  "success": true,
+  "received": 3,
+  "success": 2,
+  "errors": ["Item 2: school_id não encontrado"],
+  "timestamp": "2026-02-12T13:00:00.000Z"
 }`}
                         </pre>
                         <p style={{ marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                            <strong>Importante:</strong> O <code>school_id</code> deve ser exatamente o da sua escola para garantir a segurança dos dados.
-                        </p>
-                        <p style={{ marginTop: '0.5rem', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                            <strong>Novos campos:</strong> <code>dispatch_date</code> (data/hora do envio da mensagem) e <code>message_sent</code> (true se mensagem foi enviada) são usados para rastrear conversões.
+                            <strong>Campos obrigatórios:</strong> school_id, asaas_payment_id, customer_name, value
                         </p>
                     </div>
                 </div>
